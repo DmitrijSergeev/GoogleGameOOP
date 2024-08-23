@@ -1,7 +1,7 @@
 import {Game, GAME_STATUSES} from "./game.js";
 
 describe('Game', () => {
-    it("let's start",  async () => {
+    it("let's start", async () => {
         const game = new Game()
 
         let status = await game.getStatus()
@@ -17,7 +17,7 @@ describe('Game', () => {
     })
 
     it('should return correct Google position ' +
-        'that changed every second', async ()=>{
+        'that changed every second', async () => {
 
         const game = new Game()
         await game.start()
@@ -25,9 +25,14 @@ describe('Game', () => {
         let googlePosition = await game.getGooglePosition()
         expect(googlePosition).toBeDefined()
 
-        setTimeout( async ()=>{
-            let googlePosition2 = await game.getGooglePosition()
-            expect(googlePosition).toBeDefined()
-        }, 3000 )
-    } )
+        await delay(3000)
+
+        let googlePosition2 = await game.getGooglePosition()
+        expect(googlePosition2).not.toEqual(googlePosition)
+    })
+})
+
+
+export const delay = (ms) => new Promise((res) => {
+    setTimeout(res, ms)
 })
