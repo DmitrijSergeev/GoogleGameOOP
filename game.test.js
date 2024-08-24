@@ -1,8 +1,10 @@
 import {Game, GAME_STATUSES} from "./game.js";
+import {NumberUtil} from "./numberUtil.js";
 
 describe('Game', () => {
     it("let's start", async () => {
-        const game = new Game()
+        const numberUtil = new NumberUtil
+        const game = new Game(numberUtil)
 
         let status = await game.getStatus()
 
